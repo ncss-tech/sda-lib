@@ -18,11 +18,17 @@ ORDER BY comppct_r DESC, compname}
 AS component RELATE mukey TO mukey)
 ```
 
+### Example Table format
+
+![Table 1 output](https://github.com/ncss-tech/sda-lib/trunk/test folder/Table1.png)
+
+![Table 2 output](https://github.com/ncss-tech/sda-lib/trunk/test folder/Table2.png)
 
 
-For additional information on constructing and using Shape commands, please see a current text on Active X Data Objects (ADO), or search the web using the key phrase "ADO shape command". At the time this was written, an introduction to Shape command syntax was available as an article in the Microsoft Knowledge Base at the following 
+### Additonal Information
+Constructing and using Shape commands, please see a current text on Active X Data Objects (ADO), or search the web using the key phrase "ADO shape command". At the time this was written, an introduction to Shape command syntax was available as an article in the Microsoft Knowledge Base at the following 
 
-URL:http://support.microsoft.com/kb/189657/en-us
+URL: http://support.microsoft.com/kb/189657/en-us
 
 A couple sample Shape commands are also included in the sample query document titled "Using an ADO Shape Command", available at the following 
 
