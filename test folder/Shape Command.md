@@ -20,9 +20,9 @@ AS component RELATE mukey TO mukey)
 
 ### Example Table format
 
-![alt.text](/Table Images/ShapeCommandT1.png)
+![alt.text](/TableImages/ShapeCommandT1.png)
 
-![alt.text](/Table Images/ShapeCommandT2.png)
+![alt.text](/TableImages/ShapeCommandT2.png)
 
 
 ### Additonal Information
