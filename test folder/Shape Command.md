@@ -1,7 +1,7 @@
-##Shape Command
+## Shape Command
 Below is a simple sample Shape command that returns map unit symbol, map unit name, component name and corresponding representative percent composition for all components for all map units for the Hall County Nebraska SSURGO survey area.
 
-'''r
+``` SQL
 SHAPE {
 SELECT musym, muname, mukey
 FROM legend l
@@ -16,7 +16,7 @@ LEFT OUTER JOIN component c ON mu.mukey = c.mukey
 WHERE areasymbol = 'NE079'
 ORDER BY comppct_r DESC, compname}
 AS component RELATE mukey TO mukey)
-'''
+```
 
 
 
