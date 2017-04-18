@@ -20,9 +20,9 @@ AS component RELATE mukey TO mukey)
 
 ### Example Table format
 
-![Table 1 output](https://github.com/ncss-tech/sda-lib/trunk/test folder/Table1.png)
+![Table 1 output](/test folder/Table1.png)
 
-![Table 2 output](https://github.com/ncss-tech/sda-lib/trunk/test folder/Table2.png)
+![Table 2 output](/test folder/Table2.png)
 
 
 ### Additonal Information
