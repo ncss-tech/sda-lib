@@ -7,14 +7,14 @@ SHAPE {
 SELECT musym, muname, mukey
 FROM legend l
 INNER JOIN mapunit mu ON l.lkey = mu.lkey
-WHERE areasymbol = **'NE079' **
+WHERE areasymbol = 'NE079'
 ORDER BY museq}
 APPEND ({
 SELECT mu.mukey, comppct_r, compname
 FROM legend l
 INNER JOIN mapunit mu ON l.lkey = mu.lkey
 LEFT OUTER JOIN component c ON mu.mukey = c.mukey
-WHERE areasymbol = **'NE079'**
+WHERE areasymbol = 'NE079'
 ORDER BY comppct_r DESC, compname}
 AS component RELATE mukey TO mukey)
 ```
