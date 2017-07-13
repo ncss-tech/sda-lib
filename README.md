@@ -1,5 +1,5 @@
 # sda-lib 
-[GitHub sda-lib Wiki Home](https://github.com/ncss-tech/sda-lib/wiki) Soil Data Access is the name of a suite of web services and applications whose purpose is to meet requirements for requesting and delivering soil survey spatial and tabular data that are not being met by the current Web Soil Survey and Geospatial Data Gateway websites.
+[GitHub sda-lib Wiki Home](https://github.com/ncss-tech/sda-lib/wiki) 
 
 ## Soil Data Access Query Page
 1. [Submitting a Query](https://sdmdataaccess.nrcs.usda.gov/Query.aspx) Submit your own SQL or SQL Data Shaping query to retrieve data from the Soil Data Mart.
