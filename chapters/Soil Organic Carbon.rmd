@@ -132,7 +132,12 @@ FROM #acpf
 WHERE texture NOT LIKE '%PM%' and texture NOT LIKE '%DOM' and texture NOT LIKE '%MPT%' AND texture NOT LIKE '%MUCK' AND texture NOT LIKE '%PEAT%'
 GROUP BY compname, cokey
 ```
-![](https://github.com/ncss-tech/sda-lib/blob/master/TableImages/SOC_hortopdepth.JPG)
+|mpname|cokey|min_t|
+|------|-----|-----|
+|Fivepoints|13906974|0|
+|NewGlarus|13906975|0|
+
+
 
 ### acpf2 Table
 ```SQL 
@@ -153,7 +158,12 @@ FROM #hortopdepth
 INNER JOIN #acpf on #hortopdepth.cokey=#acpf.cokey AND #hortopdepth.min_t = #acpf.hzdept_r
 ORDER BY #hortopdepth.cokey, hzname
 ```
-![](https://github.com/ncss-tech/sda-lib/blob/master/TableImages/SOC_ACPF2.JPG)
+|cokey|hzname|hzdept_r|hzdepb_r|thickness|texture_surf|om_surf|db_surf|frag_surf|chkey|
+|-----|------|--------|--------|---------|------------|-------|-------|---------|-----|
+|13906974|	Ap|	0|	18|	18|	SIL|	1.5|	1.4	|5|	39904473|
+13906975|	Ap|	0|	23|	23|	SIL|	1.5|	1.4|	3|	39904478|
+
+
 
 ### acpfhzn Table
 ```SQL
