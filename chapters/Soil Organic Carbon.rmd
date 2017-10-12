@@ -1,15 +1,18 @@
 # Soil Organic Carbon Stock Weighted Mean
-[SQL Script Soil Organic Carbon Stock (Soil Data Access SQL Script)](https://github.com/ncss-tech/sda-lib/blob/master/SQL-Library/SDA_SOC_Weighted_Mean_Soil_Organic_Carbon_Stock.sql) Soil organic carbon stock estimate (SOC) in total soil profile (0 cm to the any predetermined depth up to the depth  of the soil profile). The concentration of organic carbon present in the soil expressed in metric tons (Mg) per hectare for the total reported soil profile depth. NULL values are presented where data are incomplete or not available.
+[SQL Script Soil Organic Carbon Stock](https://github.com/ncss-tech/sda-lib/blob/master/SQL-Library/SDA_SOC_Weighted_Mean_Soil_Organic_Carbon_Stock.sql) This query is meant to be run through the [Soil Data Access](https://sdmdataaccess.nrcs.usda.gov/Query.aspx) tabular data query portal. This interface queries current databases maintained by the U.S. National Cooperative Soil Survey. 
+Soil organic carbon  (SOC) stocks are estimates of the total mass of  SOC in total soil profile for a given depth (0 cm to the any predetermined depth) up to the depth  of the soil profile. SOC stocks present in each soil component and mapunit is expressed in metric tons (Mg) per hectare for predetermined depth increments. NULL values are presented where data are incomplete or not available.
 
-list:
+General Information about this query:
    * Uses all components with horizon data.
    * Does not calculate component SOC below the following component restrictions:
    * Lithic bedrock, Paralithic bedrock, Densic bedrock, Fragipan, Duripan, Sulfuric
-   * soc =  ( (hzT * ( ( om / 1.724 ) * db3 )) / 100.0 ) * ((100.0 - fragvol) / 100.0)
+   * Layer SOC stock =  ( (hzT * ( ( om / 1.724 ) * db3 )) / 100.0 ) * ((100.0 - fragvol) / 100.0)
    * Areasymbol listed twice in the script for Entire SSURGO use "areasymbol  <> 'US'" OR STATSGO use "areasymbol = 'US'"
    
    
-   ### Main Table
+### MapUnit Table
+This table selects a given area of interst. For Entire SSURGO use "areasymbol  <> 'US'" OR STATSGO use "areasymbol = 'US'Areasymbol. This is an example from areasymbol = 'WI025'.
+
    ```SQL 
    SELECT areasymbol, areaname, mapunit.mukey, mapunit.mukey AS mulink, mapunit.musym, 
    nationalmusym, mapunit.muname, mukind, muacres
@@ -25,7 +28,21 @@ INNER JOIN muaggatt AS mt1 on mapunit.mukey=mt1.mukey
 |WI025|	Dane County, Wisconsin|	2809839|	2809839|	161B2|	1q9nn|	Fivepoints silt loam, 2 to 6 percent slopes, moderately eroded|	Consociation|	113|
 
 
-### acpf Table
+### Component and Layer Table
+###### acpf Table
+This table collects map unit and component information needed. This includes all map units selected above and all components (typically soil series) within each map unit that do not have a limiting layer within 200cm. This example is limited to one mapunit, mukey = 2809839.  The information needed for further SOC stock calculations, individual layer information, is selected from each component.
+
+Component variables used in SOC stock calculation (r denotes that the value is representative of the central tendency):
+   * comppct_r = the proportion of each map unit made up of that soil component
+   
+Layer variables used in SOC stock calculation (r denotes that the value is representative of the central tendency):
+   * hzdept_r  = top depth of layer
+   * hzdepb = bottom depth of layer
+   * om_r = layer organic matter (%) content. US soil survey databases report OM (NSSH, 2017 )this is typically based on measurement of total combustion carbon and calcium carbonate concentration by calcimeter (KSSL, 2014). 
+   * dbthirdbar_r = bulk density represting field conditions. US soil survey bases this on a clod measurement of volume at 1/3 bar and weight at oven dry water content (KSSL, 2014) 
+   * fragvol_r = Volume of coarse fragments (>2mm in size), typically based on visual estimates
+
+
 ```SQL
 SELECT
 -- grab survey area data
@@ -95,7 +112,10 @@ ORDER by l.areasymbol, mu.musym, hzdept_r
 
 
 
-### MUACPF Table
+### Mapunit Componet Table
+##### MUACPF Table
+These tables summarize the proportion of components in each map unit.  The components should sum to 100, but this step ensures that any database errors to not overestimate or underestimate stocks on an areal basis.
+
 ```SQL
 ---Sums the Component Percent and eliminate duplicate values by cokey
 SELECT mukey, cokey,  SUM (DISTINCT sum_comp) AS sum_comp2
@@ -111,7 +131,7 @@ GROUP BY mukey, cokey
 
 
 
-### MUACPF2 Table
+##### MUACPF2 Table
 ```SQL
 ---Sums the component percent in a map unit
 SELECT mukey, cokey, sum_comp2,  SUM (sum_comp2) over(partition by #muacpf.mukey ) AS sum_comp3 --, SUM (sum_comp2) AS sum_comp3
@@ -126,6 +146,10 @@ GROUP BY mukey, cokey, sum_comp2
 
 
 
+__??is this table actually used??__
+
+#Surface properties
+These table evaluate surface textures.  Data attribution may be uneven for non-mineral layers.  Current implementaton begivs
 
 ### hortopdepth Table
 ```SQL
