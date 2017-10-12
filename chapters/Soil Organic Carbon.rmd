@@ -17,7 +17,11 @@ INNER JOIN mapunit on legend.lkey=mapunit.lkey AND mapunit.mukey = 2809839
 INNER JOIN muaggatt AS mt1 on mapunit.mukey=mt1.mukey
 --AND legend.areasymbol = 'WI025'
 ```
-![](https://github.com/ncss-tech/sda-lib/blob/master/TableImages/SOC_Main.JPG)
+
+|areasymbol|	areaname|	mukey|	mulink|	musym|	nationalmusym|	muname|	mukind	|muacres|
+| ----- | --------- | --------- | --------- | --------- |--------- |--------- |--------- |--------- |
+|WI025|	Dane County, Wisconsin|	2809839|	2809839|	161B2|	1q9nn|	Fivepoints silt loam, 2 to 6 percent slopes, moderately eroded|	Consociation|	113|
+
 
 ### acpf Table
 ```SQL
