@@ -17,6 +17,7 @@ INNER JOIN mapunit on legend.lkey=mapunit.lkey AND mapunit.mukey = 2809839
 INNER JOIN muaggatt AS mt1 on mapunit.mukey=mt1.mukey
 --AND legend.areasymbol = 'WI025'
 ```
+![](https://github.com/ncss-tech/sda-lib/blob/master/TableImages/SOC_Main.JPG)
 
 ### acpf Table
 ```SQL
@@ -73,6 +74,7 @@ ELSE 1 END = 1
 INNER JOIN chtexturegrp ct ON ch.chkey=ct.chkey and ct.rvindicator = 'yes'
 ORDER by l.areasymbol, mu.musym, hzdept_r 
 ```
+![](https://github.com/ncss-tech/sda-lib/blob/master/TableImages/SOC_ACPF.JPG)
 
 ### MUACPF Table
 ```SQL
@@ -83,6 +85,8 @@ FROM #acpf AS acpf2
 WHERE acpf2.cokey=cokey
 GROUP BY mukey, cokey
 ```
+![](https://github.com/ncss-tech/sda-lib/blob/master/TableImages/SOC_muacpf.JPG)
+
 ### MUACPF2 Table
 ```SQL
 ---Sums the component percent in a map unit
@@ -91,6 +95,8 @@ INTO #muacpf2
 FROM #muacpf
 GROUP BY mukey, cokey, sum_comp2
 ```
+![](https://github.com/ncss-tech/sda-lib/blob/master/TableImages/SOC_muacpf2.JPG)
+
 
 ### hortopdepth Table
 ```SQL
@@ -101,6 +107,8 @@ FROM #acpf
 WHERE texture NOT LIKE '%PM%' and texture NOT LIKE '%DOM' and texture NOT LIKE '%MPT%' AND texture NOT LIKE '%MUCK' AND texture NOT LIKE '%PEAT%'
 GROUP BY compname, cokey
 ```
+![](https://github.com/ncss-tech/sda-lib/blob/master/TableImages/SOC_hortopdepth.JPG)
+
 ### acpf2 Table
 ```SQL 
 ---combine the mineral surface to grab surface mineral properties
@@ -120,7 +128,9 @@ FROM #hortopdepth
 INNER JOIN #acpf on #hortopdepth.cokey=#acpf.cokey AND #hortopdepth.min_t = #acpf.hzdept_r
 ORDER BY #hortopdepth.cokey, hzname
 ```
-### acpf2 Table
+![](https://github.com/ncss-tech/sda-lib/blob/master/TableImages/SOC_ACPF2.JPG)
+
+### acpfhzn Table
 ```SQL
 SELECT
 mukey,
@@ -138,6 +148,7 @@ chkey
 INTO #acpfhzn
 FROM #acpf
 ```
+![](https://github.com/ncss-tech/sda-lib/blob/master/TableImages/SOC_acpfhzn.JPG)
 
 ### SOC Table
 ```SQL
@@ -193,6 +204,8 @@ INTO #SOC
 FROM #acpf
 ORDER BY cokey, hzdept_r ASC, hzdepb_r ASC, chkey
 ```
+![](https://github.com/ncss-tech/sda-lib/blob/master/TableImages/SOC_SOC.JPG)
+
 ### SOC2 Table
 ```SQL
 SELECT mukey, cokey, hzname, chkey, comppct_r, hzdept_r, hzdepb_r, thickness, 
@@ -214,6 +227,8 @@ INTO #SOC2
 FROM #SOC
 ORDER BY  mukey ,cokey, comppct_r DESC, hzdept_r ASC, hzdepb_r ASC, chkey
 ```
+![](https://github.com/ncss-tech/sda-lib/blob/master/TableImages/SOC_SOC2.JPG)
+
 ### SOC3 Table
 ```SQL
 ---Aggregates and sum it by component. 
@@ -224,7 +239,7 @@ ROUND (SUM (HZ_SOC_50_100) over(PARTITION BY cokey),3)  AS CO_SOC_50_100
 INTO #SOC3
 FROM #SOC2
 ```
-
+![](https://github.com/ncss-tech/sda-lib/blob/master/TableImages/SOC_SOC3.JPG)
 
 
 
