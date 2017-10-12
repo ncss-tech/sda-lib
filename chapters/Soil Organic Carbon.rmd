@@ -145,9 +145,6 @@ GROUP BY mukey, cokey, sum_comp2
 |2809839|13906975|10|100|
 
 
-
-__??is this table actually used??__
-
 #Surface properties
 These table evaluate surface textures.  Data attribution may be uneven for non-mineral layers.  Current implementaton begivs
 
