@@ -145,7 +145,7 @@ GROUP BY mukey, cokey, sum_comp2
 |2809839|13906975|10|100|
 
 
-#Surface properties
+# Surface properties
 These table evaluate surface textures.  Data attribution may be uneven for non-mineral layers.  Current implementaton begivs
 
 ### hortopdepth Table
@@ -154,7 +154,7 @@ These table evaluate surface textures.  Data attribution may be uneven for non-m
 SELECT compname, cokey, MIN(hzdept_r) AS min_t
 INTO #hortopdepth
 FROM #acpf
-WHERE texture NOT LIKE '%PM%' and texture NOT LIKE '%DOM' and texture NOT LIKE '%MPT%' AND texture NOT LIKE '%MUCK' AND texture NOT LIKE '%PEAT%'
+--WHERE texture NOT LIKE '%PM%' and texture NOT LIKE '%DOM' and texture NOT LIKE '%MPT%' AND texture NOT LIKE '%MUCK' AND texture NOT -----LIKE '%PEAT%'
 GROUP BY compname, cokey
 ```
 |mpname|cokey|min_t|
