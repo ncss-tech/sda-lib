@@ -100,7 +100,12 @@ FROM #acpf AS acpf2
 WHERE acpf2.cokey=cokey
 GROUP BY mukey, cokey
 ```
-![](https://github.com/ncss-tech/sda-lib/blob/master/TableImages/SOC_muacpf.JPG)
+|mukey|cokey|sum_comp2|
+|-----|-----|---------|
+|2809839|13906974|90|
+|2809839|13906975|10|
+
+
 
 ### MUACPF2 Table
 ```SQL
