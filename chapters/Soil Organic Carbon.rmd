@@ -1,11 +1,12 @@
 # Soil Organic Carbon Stock Weighted Mean
-[SQL Script Soil Organic Carbon Stock](https://github.com/ncss-tech/sda-lib/blob/master/SQL-Library/SDA_SOC_Weighted_Mean_Soil_Organic_Carbon_Stock.sql) Soil organic carbon stock estimate (SOC) in total soil profile (0 cm to the reported depth of the soil profile). The concentration of organic carbon present in the soil expressed in grams C per square meter for the total reported soil profile depth. NULL values are presented where data are incomplete or not available.
+[SQL Script Soil Organic Carbon Stock](https://github.com/ncss-tech/sda-lib/blob/master/SQL-Library/SDA_SOC_Weighted_Mean_Soil_Organic_Carbon_Stock.sql) Soil organic carbon stock estimate (SOC) in total soil profile (0 cm to the any predetermined depth up to the depth  of the soil profile). The concentration of organic carbon present in the soil expressed in metric tons (Mg) per hectare for the total reported soil profile depth. NULL values are presented where data are incomplete or not available.
 
 list:
    * Uses all components with horizon data.
    * Does not calculate component SOC below the following component restrictions:
    * Lithic bedrock, Paralithic bedrock, Densic bedrock, Fragipan, Duripan, Sulfuric
    * soc =  ( (hzT * ( ( om / 1.724 ) * db3 )) / 100.0 ) * ((100.0 - fragvol) / 100.0)
+   * Areasymbol listed twice in the script 
    
    ### Main Table
    ```SQL 
@@ -330,7 +331,7 @@ INNER JOIN #muacpf3 ON #muacpf3.cokey=#SOC3.cokey
 
 ### End Table
 ```SQL 
-SELECT DISTINCT #main.mukey, ROUND (SUM (WEIGHTED_CO_SOC_0_30) over(PARTITION BY #SOC4.mukey) ,3)* 100 AS SOC_0_30 --, 
+SELECT DISTINCT #main.mukey, ROUND (SUM (WEIGHTED_CO_SOC_0_30) over(PARTITION BY #SOC4.mukey) ,3)* 100 AS SOCSTOCK_0_30 --, 
 --Unit Conversion
 ---ROUND (SUM (CO_SOC_20_50) over(PARTITION BY #SOC3.mukey),3) AS SOC_20_50, 
 ---ROUND(SUM (CO_SOC_50_100) over(PARTITION BY #SOC3.mukey),3)  AS SOC_50_100 
