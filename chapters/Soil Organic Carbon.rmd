@@ -5,7 +5,7 @@ Soil organic carbon  (SOC) stocks are estimates of the total mass of  SOC in tot
 General Information about this query:
    * Uses all components with horizon data.
    * Does not calculate component SOC below the following component restrictions:
-   * Lithic bedrock, Paralithic bedrock, Densic bedrock, Fragipan, Duripan, Sulfuric
+   * Lithic bedrock, Paralithic bedrock, Densic bedrock, Fragipan, Duripan, Sulfuric, Petrocalcic and Petroferic 
    * Layer SOC stock =  ( (hzT * ( ( om / 1.724 ) * db3 )) / 100.0 ) * ((100.0 - fragvol) / 100.0)
    * Areasymbol listed twice in the script for Entire SSURGO use "areasymbol  <> 'US'" OR STATSGO use "areasymbol = 'US'"
    
