@@ -6,7 +6,8 @@ list:
    * Does not calculate component SOC below the following component restrictions:
    * Lithic bedrock, Paralithic bedrock, Densic bedrock, Fragipan, Duripan, Sulfuric
    * soc =  ( (hzT * ( ( om / 1.724 ) * db3 )) / 100.0 ) * ((100.0 - fragvol) / 100.0)
-   * Areasymbol listed twice in the script 
+   * Areasymbol listed twice in the script for Entire SSURGO use "areasymbol  <> 'US'" OR STATSGO use "areasymbol = 'US'"
+   
    
    ### Main Table
    ```SQL 
