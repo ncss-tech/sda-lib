@@ -1,5 +1,6 @@
 # sda-lib 
-[GitHub sda-lib Wiki Home](https://github.com/ncss-tech/sda-lib/wiki) Soil Data Access is the name of a suite of web services and applications whose purpose is to meet requirements for requesting and delivering soil survey spatial and tabular data that are not being met by the current Web Soil Survey and Geospatial Data Gateway websites.
+[SQL Script Soil Organic Carbon Stock](https://github.com/ncss-tech/sda-lib/blob/master/SQL-Library/SDA_SOC_Weighted_Mean_Soil_Organic_Carbon_Stock.sql) Soil organic carbon stock estimate (SOC) in total soil profile (0 cm to the reported depth of the soil profile). The concentration of organic carbon present in the soil expressed in grams C per square meter for the total reported soil profile depth. NULL values are presented where data are incomplete or not available.
+
 
 ## Soil Data Access Query Page
 1. [Submitting a Query](https://sdmdataaccess.nrcs.usda.gov/Query.aspx) Submit your own SQL or SQL Data Shaping query to retrieve data from the Soil Data Mart.
