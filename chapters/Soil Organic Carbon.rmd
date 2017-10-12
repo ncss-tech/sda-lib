@@ -1,14 +1,9 @@
-# sda-lib 
+# Soil Organic Carbon Stock Wighted Mean
 [SQL Script Soil Organic Carbon Stock](https://github.com/ncss-tech/sda-lib/blob/master/SQL-Library/SDA_SOC_Weighted_Mean_Soil_Organic_Carbon_Stock.sql) Soil organic carbon stock estimate (SOC) in total soil profile (0 cm to the reported depth of the soil profile). The concentration of organic carbon present in the soil expressed in grams C per square meter for the total reported soil profile depth. NULL values are presented where data are incomplete or not available.
 
-
-## Soil Data Access Query Page
-1. [Submitting a Query](https://sdmdataaccess.nrcs.usda.gov/Query.aspx) Submit your own SQL or SQL Data Shaping query to retrieve data from the Soil Data Mart.
-2. [Using Soil Data Access web services Help](https://sdmdataaccess.nrcs.usda.gov/Help.aspx) Soil Data Access Web Service Help.
-3. [Creating my own custom database queries Help](https://sdmdataaccess.nrcs.usda.gov/QueryHelp.aspx) Soil Data Access Query Help. This page provides information one needs in order to effectively query Soil Data Access. Documents and other guides.
-3. [Using the Soil Data Access website Help](https://sdmdataaccess.nrcs.usda.gov/Help.aspx)  Soil Data Access Help. The purpose of this page is to provide you with general information about this site and to help you resolve some common issues that may be experienced whilst browsing. 
-4. [Citing Soil Data Access as a source of soils data.](https://sdmdataaccess.nrcs.usda.gov/Citation.htm)
-5. [Advanced Queries](https://sdmdataaccess.nrcs.usda.gov/documents/AdvancedQueries.html) Soil Data Access provides two advanced features for querying spatial data:
-    * Tabular Functions act as "virtual" tables that can be used in the "FROM" clause of a query.
-    * Macros are condensed statements that SDA expands into full SQL statements.
+list:
+   * Uses all components with horizon data.
+   * Does not calculate component SOC below the following component restrictions:
+   * Lithic bedrock, Paralithic bedrock, Densic bedrock, Fragipan, Duripan, Sulfuric
+   * soc =  ( (hzT * ( ( om / 1.724 ) * db3 )) / 100.0 ) * ((100.0 - fragvol) / 100.0)
 
