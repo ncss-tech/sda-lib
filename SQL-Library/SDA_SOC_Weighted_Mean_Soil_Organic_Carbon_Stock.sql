@@ -5,34 +5,18 @@
 ---Does not calculate component SOC below the following component restrictions:
 ---Lithic bedrock, Paralithic bedrock, Densic bedrock, Fragipan, Duripan, Sulfuric
 ---
-----soc =  ( (hzT * ( ( om / 1.724 ) * db3 )) / 100.0 ) * ((100.0 - fragvol) / 100.0) * ( compPct * 100 )
+----soc =  ( (hzT * ( ( om / 1.724 ) * db3 )) / 100.0 ) * ((100.0 - fragvol) / 100.0) 
 
---  soc      = ( (H2 * ( ( L2 / 1.724 ) * J2 )) / 100.0 ) * ((100.0 - K2) / 100.0) * ( F2 * 100 )
-
----A			B		C		D				E			F			G			H			I 			J				K			L		M			N
----mukey	cokey		hzname	restrictiodepth	hzdept_r	comppct_r	hzdepb_r	thickness	texture		dbthirdbar_r	fragvol		om_r	chkey		SOC
----2809839	13906974	Ap		89				0			90			18			18			SIL			1.4				5			1.5		39904473	1874.651972
----2809839	13906974	Bt1		89				18			90			25			7			SICL		1.5				5			0.5	3	9904470		260.3683295
----2809839	13906974	2Bt2	89				25			90			48			23			C			1.4				11			0.25	39904471	374.0168213
----2809839	13906974	3Bt3	89				48			90			89			41			CNV-L		1.5				45			0.25	39904472	441.4515661
----																																						Sum	2950.488689		
-																																						
----2809839	13906975	Ap		114				0			10			23			23			SIL			1.4				3			1.5		39904478	271.7575406
----2809839	13906975	BE		114				23			10			33			10			SIL			1.4				3			0.25	39904479	19.69257541
----2809839	13906975	2Bt2	114				58			10			89			31			C			1.4				11			0.25	39904475	56.01218097
----2809839	13906975	3Bt3	114				89			10			114			25			CNV-L		1.5				45			0.25	39904476	29.90864269
----																																						Sum 377.3709397											
----																																			SOC_0_999 Total 3327.859629
-
+--  soc      = ( (H2 * ( ( L2 / 1.724 ) * J2 )) / 100.0 ) * ((100.0 - K2) / 100.0) 
 
 
 SELECT areasymbol, areaname, mapunit.mukey, mapunit.mukey AS mulink, mapunit.musym, nationalmusym, mapunit.muname, mukind, muacres
 INTO #main
 FROM legend
-INNER JOIN mapunit on legend.lkey=mapunit.lkey AND mapunit.mukey = 2809839
+INNER JOIN mapunit on legend.lkey=mapunit.lkey --AND mapunit.mukey = 2809839 For Testing
 INNER JOIN muaggatt AS mt1 on mapunit.mukey=mt1.mukey
-AND legend.areasymbol = 'WI025'
-
+AND legend.areasymbol <> 'US' -- SSURGO
+--AND legend.areasymbol = 'US' -- STATSGO
 
 SELECT
 -- grab survey area data
@@ -75,7 +59,9 @@ INTO #acpf
 FROM legend  AS l
 INNER JOIN mapunit AS mu ON mu.lkey = l.lkey 
 --AND l.areasymbol like 'WI025'
-AND mu.mukey = 2809839
+---AND mu.mukey = 2809839 For testing
+AND l.areasymbol <> 'US' -- SSURGO
+--AND l.areasymbol = 'US' -- STATSGO
 INNER JOIN muaggatt AS  mt on mu.mukey=mt.mukey
 INNER JOIN component AS  c ON c.mukey = mu.mukey 
 INNER JOIN chorizon AS ch ON ch.cokey = c.cokey and CASE WHEN hzdept_r IS NULL THEN 2 
@@ -157,21 +143,14 @@ FROM #acpf
 
 --- depth ranges for SOC ----
 SELECT hzname, chkey, comppct_r, hzdept_r, hzdepb_r, thickness,
-CASE  WHEN hzdept_r < 150 then hzdept_r ELSE 0 END AS InRangeTop, 
-CASE  WHEN hzdepb_r <= 150 THEN hzdepb_r WHEN hzdepb_r > 150 and hzdept_r < 150 THEN 150 ELSE 0 END AS InRangeBot,
+CASE  WHEN hzdept_r < 150 then hzdept_r ELSE 0 END AS InRangeTop_0_150, 
+CASE  WHEN hzdepb_r <= 150 THEN hzdepb_r WHEN hzdepb_r > 150 and hzdept_r < 150 THEN 150 ELSE 0 END AS InRangeBot_0_150,
+
 
 CASE  WHEN hzdept_r < 30 then hzdept_r ELSE 0 END AS InRangeTop_0_30, 
 CASE  WHEN hzdepb_r <= 30  THEN hzdepb_r WHEN hzdepb_r > 30  and hzdept_r < 30 THEN 30  ELSE 0 END AS InRangeBot_0_30,
 
 
--------CASE  WHEN hzdept_r < 50 then hzdept_r ELSE 20 END AS InRangeTop_20_50, 
---------CASE  WHEN hzdepb_r <= 50  THEN hzdepb_r WHEN hzdepb_r > 50  and hzdept_r < 50 THEN 50  ELSE 20 END AS InRangeBot_20_50,
-
---CASE    WHEN hzdept_r < 20 THEN 20
---		WHEN hzdept_r < 50 then hzdept_r ELSE 20 END AS InRangeTop_20_50,
-		
---CASE    WHEN hzdepb_r < 20 THEN 20
---WHEN hzdepb_r <= 50 THEN hzdepb_r  WHEN hzdepb_r > 50 and hzdept_r < 50 THEN 50 ELSE 20 END AS InRangeBot_20_50,
 
 CASE    WHEN hzdepb_r < 20 THEN 0
 WHEN hzdept_r >50 THEN 0 
@@ -208,7 +187,10 @@ FROM #acpf
 ORDER BY cokey, hzdept_r ASC, hzdepb_r ASC, chkey
 
 
-SELECT mukey, cokey, hzname, chkey, comppct_r, hzdept_r, hzdepb_r, thickness, 
+SELECT mukey, cokey, hzname, chkey, comppct_r, hzdept_r, hzdepb_r, thickness,
+InRangeTop_0_150, 
+InRangeBot_0_150, 
+ 
 InRangeTop_0_30, 
 InRangeBot_0_30, 
 
@@ -217,6 +199,8 @@ InRangeBot_20_50,
 
 InRangeTop_50_100 ,
 InRangeBot_50_100,
+(( ((InRangeBot_0_150 - InRangeTop_0_150) * ( ( om_r / 1.724 ) * dbthirdbar_r )) / 100.0 ) * ((100.0 - fragvol) / 100.0))  AS HZ_SOC_0_150,
+
 (( ((InRangeBot_0_30 - InRangeTop_0_30) * ( ( om_r / 1.724 ) * dbthirdbar_r )) / 100.0 ) * ((100.0 - fragvol) / 100.0))  AS HZ_SOC_0_30,
 ---Removed * ( comppct_r * 100 ) 
 ((((InRangeBot_20_50 - InRangeTop_20_50) * ( ( om_r / 1.724 ) * dbthirdbar_r )) / 100.0 ) * ((100.0 - fragvol) / 100.0))  AS HZ_SOC_20_50,
@@ -229,22 +213,28 @@ ORDER BY  mukey ,cokey, comppct_r DESC, hzdept_r ASC, hzdepb_r ASC, chkey
 
 ---Aggregates and sum it by component. 
 SELECT DISTINCT cokey, mukey,  
+ROUND (SUM (HZ_SOC_0_150) over(PARTITION BY cokey) ,3) AS CO_SOC_0_150, 
 ROUND (SUM (HZ_SOC_0_30) over(PARTITION BY cokey) ,3) AS CO_SOC_0_30, 
 ROUND (SUM (HZ_SOC_20_50) over(PARTITION BY cokey),3) AS CO_SOC_20_50, 
 ROUND (SUM (HZ_SOC_50_100) over(PARTITION BY cokey),3)  AS CO_SOC_50_100 
 INTO #SOC3
 FROM #SOC2
 
-SELECT DISTINCT #SOC3.cokey, #SOC3.mukey,  WEIGHTED_COMP_PCT, CO_SOC_0_30, CO_SOC_0_30 * WEIGHTED_COMP_PCT AS WEIGHTED_CO_SOC_0_30
+SELECT DISTINCT #SOC3.cokey, #SOC3.mukey,  WEIGHTED_COMP_PCT, 
+CO_SOC_0_30, CO_SOC_0_30 * WEIGHTED_COMP_PCT AS WEIGHTED_CO_SOC_0_30,
+CO_SOC_20_50, CO_SOC_20_50 * WEIGHTED_COMP_PCT AS WEIGHTED_CO_SOC_20_50,
+CO_SOC_50_100, CO_SOC_50_100 * WEIGHTED_COMP_PCT AS WEIGHTED_CO_SOC_50_100,
+CO_SOC_0_150, CO_SOC_0_150 * WEIGHTED_COMP_PCT AS WEIGHTED_CO_SOC_0_150,
 INTO #SOC4
 FROM #SOC3
 INNER JOIN #muacpf3 ON #muacpf3.cokey=#SOC3.cokey
 
-
-SELECT DISTINCT #main.mukey, ROUND (SUM (WEIGHTED_CO_SOC_0_30) over(PARTITION BY #SOC4.mukey) ,3) *100  AS SOC_0_30 --, 
 --Unit Conversion *100
----ROUND (SUM (CO_SOC_20_50) over(PARTITION BY #SOC3.mukey),3) AS SOC_20_50, 
----ROUND(SUM (CO_SOC_50_100) over(PARTITION BY #SOC3.mukey),3)  AS SOC_50_100 
+SELECT DISTINCT #main.mukey, ROUND (SUM (WEIGHTED_CO_SOC_0_30) over(PARTITION BY #SOC4.mukey) ,3) *100  AS SOCSTOCK_0_30 , 
+ROUND (SUM (WEIGHTED_CO_SOC_20_50) over(PARTITION BY #SOC4.mukey) ,3) *100  AS SOCSTOCK_20_50 , 
+ROUND (SUM (WEIGHTED_CO_SOC_50_100) over(PARTITION BY #SOC4.mukey) ,3) *100  AS SOCSTOCK_50_100
+
+ROUND (SUM (WEIGHTED_CO_SOC_0_150) over(PARTITION BY #SOC4.mukey) ,3) *100  AS SOCSTOCK_0_150
 FROM #SOC4
 RIGHT OUTER JOIN #main ON #main.mukey=#SOC4.mukey
 
