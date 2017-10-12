@@ -321,7 +321,7 @@ INNER JOIN #muacpf3 ON #muacpf3.cokey=#SOC3.cokey
 ```
 
 
-|cokey|mukey|WEIGHTED_COMP_PCT|CO_SOC_0_3|WEIGHTED_CO_SOC_0_30|
+|cokey|mukey|WEIGHTED_COMP_PCT|CO_SOC_0_30|WEIGHTED_CO_SOC_0_30|
 |-----|-----|-----------------|----------|--------------------|
 |13906974|2809839|0.90|0.246|0.2214|
 |13906975|2809839|0.10|0.286|0.0286|
