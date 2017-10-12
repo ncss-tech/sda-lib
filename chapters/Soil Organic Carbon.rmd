@@ -11,7 +11,7 @@ General Information about this query:
    
    
 ### MapUnit Table
-This table selects a given area of interst. For Entire SSURGO use "areasymbol  <> 'US'" OR STATSGO use "areasymbol = 'US'Areasymbol. This is an example from areasymbol = 'WI025'.
+This table selects a given area of interst. For Entire SSURGO use "areasymbol  <> 'US'" OR STATSGO use "areasymbol = 'US'Areasymbol. This is an example from mukey = 2809839. Areasymbol = 'WI025' is pounded out with '--' .
 
    ```SQL 
    SELECT areasymbol, areaname, mapunit.mukey, mapunit.mukey AS mulink, mapunit.musym, 
