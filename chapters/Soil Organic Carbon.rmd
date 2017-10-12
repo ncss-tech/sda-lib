@@ -1,4 +1,4 @@
-# Soil Organic Carbon Stock Wighted Mean
+# Soil Organic Carbon Stock Weighted Mean
 [SQL Script Soil Organic Carbon Stock](https://github.com/ncss-tech/sda-lib/blob/master/SQL-Library/SDA_SOC_Weighted_Mean_Soil_Organic_Carbon_Stock.sql) Soil organic carbon stock estimate (SOC) in total soil profile (0 cm to the reported depth of the soil profile). The concentration of organic carbon present in the soil expressed in grams C per square meter for the total reported soil profile depth. NULL values are presented where data are incomplete or not available.
 
 list:
