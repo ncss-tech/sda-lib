@@ -326,8 +326,17 @@ INNER JOIN #muacpf3 ON #muacpf3.cokey=#SOC3.cokey
 |13906974|2809839|0.90|0.246|0.2214|
 |13906975|2809839|0.10|0.286|0.0286|
 
-
-
+### End Table
+```SQL 
+SELECT DISTINCT #main.mukey, ROUND (SUM (WEIGHTED_CO_SOC_0_30) over(PARTITION BY #SOC4.mukey) ,3) AS SOC_0_30 --, 
+---ROUND (SUM (CO_SOC_20_50) over(PARTITION BY #SOC3.mukey),3) AS SOC_20_50, 
+---ROUND(SUM (CO_SOC_50_100) over(PARTITION BY #SOC3.mukey),3)  AS SOC_50_100 
+FROM #SOC4
+RIGHT OUTER JOIN #main ON #main.mukey=#SOC4.mukey
+```
+|mukey|	SOC_0_30|
+|-----|---------|
+|2809839|	0.25|
 
 
 
