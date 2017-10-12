@@ -115,7 +115,12 @@ INTO #muacpf2
 FROM #muacpf
 GROUP BY mukey, cokey, sum_comp2
 ```
-![](https://github.com/ncss-tech/sda-lib/blob/master/TableImages/SOC_muacpf2.JPG)
+|mukey|cokey|sum_comp2|sum_comp3|
+|-----|-----|---------|
+|2809839|13906974|90|100|
+|2809839|13906975|10|100|
+
+
 
 
 ### hortopdepth Table
