@@ -81,15 +81,16 @@ ORDER by l.areasymbol, mu.musym, hzdept_r
 
 |state|areasymbol|areaname|sum_comp|mukey|musym|majcompflag|comppct_r|compname|compkind|localphase|slope_l|slope_r|slope_h|restrictiondepth|restrictiodepth|TOPrestriction|cokey|hzname|hzdept_r|hzdepb_r|thickness|om_r|dbthirdbar_r|fragvol|brockdepmin|texture|chkey|
 |-----|----------|--------|--------|-----|-----|-----------|---------|--------|--------|----------|-------|-------|-------|----------------|---------------|--------------|-----|------|--------|--------|---------|----|------------|-------|-----------|-------|-----|
-|WI|WI025|"Dane County| Wisconsin"|90|2809839|161B2|Yes|90|Fivepoints|Series||2|4|6|89|89|Lithic bedrock|13906974|Ap|0|18|18|1.5|1.4|5|89|SIL|39904473|
-|WI|WI025|"Dane County| Wisconsin"|10|2809839|161B2|No|10|NewGlarus|Series||2|4|6|114|114|Lithic bedrock|13906975|Ap|0|23|23|1.5|1.4|3|89|SIL|39904478|
-|WI|WI025|"Dane County| Wisconsin"|90|2809839|161B2|Yes|90|Fivepoints|Series||2|4|6|89|89|Lithic bedrock|13906974|Bt1|18|25|7|0.5|1.5|5|89|SICL|39904470|
-|WI|WI025|"Dane County| Wisconsin"|10|2809839|161B2|No|10|NewGlarus|Series||2|4|6|114|114|Lithic bedrock|13906975|BE|23|33|10|0.25|1.4|3|89|SIL|39904479|
-|WI|WI025|"Dane County| Wisconsin"|90|2809839|161B2|Yes|90|Fivepoints|Series||2|4|6|89|89|Lithic bedrock|13906974|2Bt2|25|48|23|0.25|1.4|11|89|C|39904471|
-|WI|WI025|"Dane County| Wisconsin"|10|2809839|161B2|No|10|NewGlarus|Series||2|4|6|114|114|Lithic bedrock|13906975|Bt1|33|58|25|0.25|1.5|5|89|SICL|39904480|
-|WI|WI025|"Dane County| Wisconsin"|90|2809839|161B2|Yes|90|Fivepoints|Series||2|4|6|89|89|Lithic bedrock|13906974|3Bt3|48|89|41|0.25|1.5|45|89|CNV-L|39904472|
-|WI|WI025|"Dane County| Wisconsin"|10|2809839|161B2|No|10|NewGlarus|Series||2|4|6|114|114|Lithic bedrock|13906975|2Bt2|58|89|31|0.25|1.4|11|89|C|39904475|
-|WI|WI025|"Dane County| Wisconsin"|10|2809839|161B2|No|10|NewGlarus|Series||2|4|6|114|114|Lithic bedrock|13906975|3Bt3|89|114|25|0.25|1.5|45|89|CNV-L|39904476|
+|WI|WI025|Dane County|, Wisconsin|90|2809839|161B2|Yes|90|Fivepoints|Series||2|4|6|89|89|Lithic bedrock|13906974|Ap|0|18|18|1.5|1.4|5|89|SIL|39904473|
+|WI|WI025|Dane County|, Wisconsin|10|2809839|161B2|No|10|NewGlarus|Series||2|4|6|114|114|Lithic bedrock|13906975|Ap|0|23|23|1.5|1.4|3|89|SIL|39904478|
+|WI|WI025|Dane County|, Wisconsin|90|2809839|161B2|Yes|90|Fivepoints|Series||2|4|6|89|89|Lithic bedrock|13906974|Bt1|18|25|7|0.5|1.5|5|89|SICL|39904470|
+|WI|WI025|Dane County|, Wisconsin|10|2809839|161B2|No|10|NewGlarus|Series||2|4|6|114|114|Lithic bedrock|13906975|BE|23|33|10|0.25|1.4|3|89|SIL|39904479|
+|WI|WI025|Dane County|, Wisconsin|90|2809839|161B2|Yes|90|Fivepoints|Series||2|4|6|89|89|Lithic bedrock|13906974|2Bt2|25|48|23|0.25|1.4|11|89|C|39904471|
+|WI|WI025|Dane County|, Wisconsin|10|2809839|161B2|No|10|NewGlarus|Series||2|4|6|114|114|Lithic bedrock|13906975|Bt1|33|58|25|0.25|1.5|5|89|SICL|39904480|
+|WI|WI025|Dane County|, Wisconsin|90|2809839|161B2|Yes|90|Fivepoints|Series||2|4|6|89|89|Lithic bedrock|13906974|3Bt3|48|89|41|0.25|1.5|45|89|CNV-L|39904472|
+|WI|WI025|Dane County|, Wisconsin|10|2809839|161B2|No|10|NewGlarus|Series||2|4|6|114|114|Lithic bedrock|13906975|2Bt2|58|89|31|0.25|1.4|11|89|C|39904475|
+|WI|WI025|Dane County|, Wisconsin|10|2809839|161B2|No|10|NewGlarus|Series||2|4|6|114|114|Lithic bedrock|13906975|3Bt3|89|114|25|0.25|1.5|45|89|CNV-L|39904476|
+
 
 ### MUACPF Table
 ```SQL
