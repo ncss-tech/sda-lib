@@ -10,11 +10,11 @@
 SELECT areasymbol, areaname, mapunit.mukey, mapunit.mukey AS mulink, mapunit.musym, nationalmusym, mapunit.muname, mukind, muacres
 INTO #main
 FROM legend
-INNER JOIN mapunit on legend.lkey=mapunit.lkey --AND mapunit.mukey = 2809839 For Testing
+INNER JOIN mapunit on legend.lkey=mapunit.lkey ---AND mapunit.mukey = 661781 --2809839 For Testing
 INNER JOIN muaggatt AS mt1 on mapunit.mukey=mt1.mukey
 AND legend.areasymbol <> 'US' -- SSURGO
 --AND legend.areasymbol = 'US' -- STATSGO
---AND legend.areasymbol = 'WI025'
+---AND legend.areasymbol = 'WI025'
 
 
 -------------------------------------------
@@ -62,13 +62,13 @@ INTO #acpf
 FROM legend  AS l
 INNER JOIN mapunit AS mu ON mu.lkey = l.lkey 
 ---AND l.areasymbol like 'WI025'
----AND mu.mukey = 2809839 For testing
+--AND mu.mukey = 661781 --2809839 For testing
 AND l.areasymbol <> 'US' -- SSURGO
 --AND l.areasymbol = 'US' -- STATSGO
 INNER JOIN muaggatt AS  mt on mu.mukey=mt.mukey
 INNER JOIN component AS  c ON c.mukey = mu.mukey 
-INNER JOIN chorizon AS ch ON ch.cokey = c.cokey 
-INNER JOIN chtexturegrp AS ct ON ch.chkey=ct.chkey and ct.rvindicator = 'yes'
+LEFT OUTER JOIN  chorizon AS ch ON ch.cokey = c.cokey 
+LEFT OUTER JOIN  chtexturegrp AS ct ON ch.chkey=ct.chkey and ct.rvindicator = 'yes'
 and CASE WHEN hzdept_r IS NULL THEN 2 
 WHEN texture LIKE '%PM%' AND om_r IS NULL THEN 1
 WHEN texture LIKE '%MUCK%' AND om_r IS NULL THEN 1
