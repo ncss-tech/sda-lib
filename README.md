@@ -10,4 +10,7 @@
 5. [Advanced Queries](https://sdmdataaccess.nrcs.usda.gov/documents/AdvancedQueries.html) Soil Data Access provides two advanced features for querying spatial data:
     * Tabular Functions act as "virtual" tables that can be used in the "FROM" clause of a query.
     * Macros are condensed statements that SDA expands into full SQL statements.
+    
+   ## Soil Data Access Script Examples with Explanation
+   * [Soil Organic Carbon Stocks by Map Unit](https://ncss-tech.github.io/sda-lib/chapters/Soil%20Organic%20Carbon%20Stocks.html) 
 
