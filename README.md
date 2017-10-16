@@ -12,5 +12,6 @@
     * Macros are condensed statements that SDA expands into full SQL statements.
     
    ## Soil Data Access Script Examples with Explanation
-   * [Soil Organic Carbon Stocks by Map Unit](https://ncss-tech.github.io/sda-lib/chapters/Soil%20Organic%20Carbon%20Stocks.html) 
+ list:
+   *  [Soil Organic Carbon Stocks by Map Unit](https://ncss-tech.github.io/sda-lib/chapters/Soil%20Organic%20Carbon%20Stocks.html) 
 
