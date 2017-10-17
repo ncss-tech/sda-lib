@@ -410,7 +410,7 @@ FROM #SOC2
 |13906975|	2809839|	0.286|	0.09|	0.086|
 
 
-####Weighted Average of Components within each map unit.
+#### Weighted Average of Components within each map unit.
 $$SOC_{mu} = (\sum_{C}^n SOC_d*Cpct) * 100$$
 where SOCmu is the average SOC stock in each map unit, c is the number of components, Cpct is the proportion of each component within the map unit and SOCd is the carbon stock within a given depth increment. Converted for expression in units of  $Mg C ha ^{-1}$:
 
@@ -468,7 +468,7 @@ RIGHT OUTER JOIN #main ON #main.mukey=#SOC4.mukey
 The SOCstock was for 0 - 30cm was exported for further GIS interpolation and extrapolation.
 
 
-##Sources and Citations
+## Sources and Citations
 The data source of this data is the STATSGO and SSURGO data from the US National Cooperative Soil Survey.  The following references cover data definitions, derivation and quality procedures.
  
 **NSSH** - U.S. Department of Agriculture, Natural Resources Conservation Service. National soil survey handbook, title 430-VI.	http://www.nrcs.usda.gov/wps/portal/nrcs/detail/soils/ref/?cid=nrcs142p2_054242 (accessed day month year).
