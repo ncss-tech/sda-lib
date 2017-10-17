@@ -150,7 +150,7 @@ GROUP BY mukey, cokey, sum_comp2
 
 
 
-##Layer Data
+## Layer Data
 Tables that collect data by layers (horizons) from each component needed for SOC stock calculation
 
 Layer variables used in SOC stock calculation (r denotes that the value is representative of the central tendency):
@@ -316,7 +316,7 @@ ORDER BY cokey, hzdept_r ASC, hzdepb_r ASC, chkey
 |3Bt3|39904476|10|89|114|25|89|114|0|0|0|0|89|100|0.25|45|1.5|13906975|2809839|55|
 
 
-#####Execute SOC layer calculations.
+#### Execute SOC layer calculations.
 Layer SOC stock =  ( (hzT * ( ( om / 1.724 ) * db3 )) / 100.0 ) * ((100.0 - fragvol) / 100.0) 
 
 $$Layer SOC stock  =  Thickness * (om/1.724)/100 * \rho * (1-FRAG)$$
@@ -465,13 +465,13 @@ RIGHT OUTER JOIN #main ON #main.mukey=#SOC4.mukey
 |2809839|25|
 
 ## Global Soil Organic Carbon Output
-The SOCstock was for 0 - 30cm was exported for further GIS interpolation and extrapolation.
+The SOCstock for 0 - 30cm (high, rv, and low) was exported for further GIS interpolation and extrapolation.
 
 
 ## Sources and Citations
 The data source of this data is the STATSGO and SSURGO data from the US National Cooperative Soil Survey.  The following references cover data definitions, derivation and quality procedures.
  
-**NSSH** - U.S. Department of Agriculture, Natural Resources Conservation Service. National soil survey handbook, title 430-VI.	http://www.nrcs.usda.gov/wps/portal/nrcs/detail/soils/ref/?cid=nrcs142p2_054242 (accessed day month year).
+**NSSH** - U.S. Department of Agriculture, Natural Resources Conservation Service. National soil survey handbook, title 430-VI.	http://www.nrcs.usda.gov/wps/portal/nrcs/detail/soils/ref/?cid=nrcs142p2_054242 (accessed 13 October 2017).
 
 **KSSL** - Laboratory Methods Manual (SSIR 42), version 5, 2014 (PDF; 6.29 MB)
 
