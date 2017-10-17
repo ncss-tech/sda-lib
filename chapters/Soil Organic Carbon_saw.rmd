@@ -2,7 +2,7 @@
 title: "Soil Organic Carbon Stocks"
 author: "J. Nemececk and S.A. Wills"
 date: "October 12, 2017"
-output: doc_document
+output: word_document
 ---
 
 
