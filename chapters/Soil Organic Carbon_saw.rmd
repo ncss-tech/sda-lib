@@ -19,7 +19,7 @@ General Information about this query:
    * Areasymbol listed twice in the script for Entire SSURGO use "areasymbol  <> 'US'" OR STATSGO use "areasymbol = 'US'"
    
    
-### MapUnit Table
+## MapUnit Table
 This table selects all map units for a given area of interst. Mapunits are described as a collection of areas defined and named the same in terms of their soil components by the NSSH (Part 627.03).  To select all mapunits for the most detailed US soil survey product, SSURGO, use "areasymbol  <> 'US'" OR for the general soil map, STATSGO, use "areasymbol = 'US'Areasymbol. This is an example from mukey = 2809839.  For general use, Areasymbol = 'WI025' is pounded out with '--' .
 
 ```{SQL}
@@ -45,7 +45,7 @@ Component variables used in SOC stock calculation (r denotes that the value is r
    * comppct_r = the composition of each map unit, reported as the proportion (%) of the map unit made up of that soil component as part of the map unit documentation process (NSSH, 2017 -- Part 627.08)
 
 
-##### acpf Table
+###### acpf Table
 ```{SQL}
 SELECT
 -- grab survey area data
@@ -115,13 +115,13 @@ ORDER by l.areasymbol, mu.musym, hzdept_r
 
 
 
-### Mapunit Component Composition Table
-##### MUACPF Table
+## Mapunit Component Composition Table
+
 These tables summarize the proportion of components in each map unit.  The components should sum to 100, but this step ensures that any database errors to not overestimate or underestimate stocks on an areal basis.
 
 
-##### MUACPF Table
-````{SQL}
+###### MUACPF Table
+```{SQL}
 ---Sums the Component Percent and eliminate duplicate values by cokey
 SELECT mukey, cokey,  SUM (DISTINCT sum_comp) AS sum_comp2
 INTO #muacpf
@@ -135,7 +135,7 @@ GROUP BY mukey, cokey
 |2809839|13906975|10|
 
 
-##### MUACPF2 Table
+###### MUACPF2 Table
 ```{SQL}
 ---Sums the component percent in a map unit
 SELECT mukey, cokey, sum_comp2,  SUM (sum_comp2) over(partition by #muacpf.mukey ) AS sum_comp3 --, SUM (sum_comp2) AS sum_comp3
@@ -316,14 +316,14 @@ ORDER BY cokey, hzdept_r ASC, hzdepb_r ASC, chkey
 |3Bt3|39904476|10|89|114|25|89|114|0|0|0|0|89|100|0.25|45|1.5|13906975|2809839|55|
 
 
-####Execute SOC layer calculations.
+#####Execute SOC layer calculations.
 Layer SOC stock =  ( (hzT * ( ( om / 1.724 ) * db3 )) / 100.0 ) * ((100.0 - fragvol) / 100.0) 
 
 $$Layer SOC stock  =  Thickness * (om/1.724)/100 * \rho * (1-FRAG)$$
 
 where Thickness is the layer/horizon thickness present within the depth increment in question ($cm$), $\rho$ is the bulk density in ($g oven dried soil in volume at one third bar, cm ^{-3}$), [om] is the concentration of organic matter in soil ($% of soil ^{-1}$), and FRAG is the proportion of sample greater than 2mm in diameter ($% by volumen$). 
 
-##### SOC2 Table
+###### SOC2 Table
 ```{SQL}
 SELECT mukey, cokey, hzname, chkey, comppct_r, hzdept_r, hzdepb_r, thickness,
 InRangeTop_0_150, 
@@ -362,8 +362,8 @@ InRangeBot_50_100,
 INTO #SOC2
 FROM #SOC
 ORDER BY  mukey ,cokey, comppct_r DESC, hzdept_r ASC, hzdepb_r ASC, chkey
-
 ```
+
 |mukey|cokey|hzname|chkey|comppct_r|hzdept_r|hzdepb_r|thickness|InRangeTop_0_30|InRangeBot_0_30|InRangeTop_20_50|InRangeBot_20_50|InRangeTop_50_100|InRangeBot_50_100|HZ_SOC_0_30|HZ_SOC_20_50|HZ_SOC_50_100|
 |-----|-----|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|
 |2809839|13906974|Ap|39904473|90|0|18|18|0|18|0|0|0|0|0.2082947|0|0|
@@ -377,10 +377,10 @@ ORDER BY  mukey ,cokey, comppct_r DESC, hzdept_r ASC, hzdepb_r ASC, chkey
 |2809839|13906975|3Bt3|39904476|10|89|114|25|0|0|0|0|89|100|0|0|0.0131598|
 
 
-####Sum SOC layers within each component.
+##### Sum SOC layers within each component.
 
 Summarize SOC stocks by component
-Pedon SOC stock ($SOCstock_D$) were summed for soil depths (D) of 0-5, 0-30, and 0-100cm using the fixed depth increment approach described by Ellert et al. (2008) 
+Pedon SOC stock ($SOCstock_D$) were summed for soil depths (D) of 0-5, 0-30, and 0-100cm using the fixed depth increment approach described by Ellert et al. (2008). Previous work has show this to be comparable to the spline technique, particularly at shallow depths (such as 0 - 30cm) 
 
 
 $$SOCstock_c = \sum_{D}^L SOC_{l} $$
@@ -464,8 +464,8 @@ RIGHT OUTER JOIN #main ON #main.mukey=#SOC4.mukey
 |-----|---------|
 |2809839|25|
 
-##Global Soil Organic Carbon Output
-Ther SOCstock was for 0 - 30cm was exported for further GIS interpolation and extrapolation.
+## Global Soil Organic Carbon Output
+The SOCstock was for 0 - 30cm was exported for further GIS interpolation and extrapolation.
 
 
 ##Sources and Citations
