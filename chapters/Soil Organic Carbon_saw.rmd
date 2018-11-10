@@ -2,11 +2,7 @@
 title: "Soil Organic Carbon Stocks"
 author: "J. Nemececk and S.A. Wills"
 date: "October 12, 2017"
-<<<<<<< HEAD
-output: doc_document
-=======
-output: word_document
->>>>>>> a9990015a84dc8e53db6a85f989f8755cf830ec4
+output: html_document
 ---
 
 
@@ -15,21 +11,23 @@ output: word_document
 Soil organic carbon  (SOC) stocks are estimates of the total mass of  SOC in total soil profile for a given depth (0 cm to the any predetermined depth) up to the depth  of the soil profile. SOC stocks present in each soil component and mapunit is expressed in metric tons (Mg) per hectare for predetermined depth increments. NULL values are presented where data are incomplete or not available.
 
 General Information about this query:
+
    * Uses all components with horizon data.
    * Does not calculate component SOC below the following component restrictions:
        + Lithic bedrock, Paralithic bedrock, Densic bedrock, Fragipan, Duripan, Sulfuric, Petrocalcic and Petroferic 
-   * Layer SOC stock =  (hzT * ( ( om / 1.724 ) * db3 ) * (100.0 - fragvol) / 100.0)
-        + Where hzT = horizon thickness, om = organic matter, db3 = bulk density and fragvol = coarse fragments.  Details in following text.
-   * Areasymbol listed twice in the script for Entire SSURGO use "areasymbol  <> 'US'" OR STATSGO use "areasymbol = 'US'"
+   * Areasymbol listed twice in the script for Entire SSURGO use `areasymbol != 'US'` OR STATSGO use `areasymbol = 'US'`
    
+$$Layer\ SOC\ stock =  (hz_{T} * ( ( om / 1.724 ) * db3 ) * (100.0 - fragvol) / 100.0)$$
+
+where `hz_{T}` = horizon thickness, `om` = organic matter, `db3` = bulk density and `fragvol` = coarse fragment volume.
    
-## MapUnit Table
-This table selects all map units for a given area of interst. Mapunits are described as a collection of areas defined and named the same in terms of their soil components by the NSSH (Part 627.03).  To select all mapunits for the most detailed US soil survey product, SSURGO, use "areasymbol  <> 'US'" OR for the general soil map, STATSGO, use "areasymbol = 'US'Areasymbol. This is an example from mukey = 2809839.  For general use, Areasymbol = 'WI025' is pounded out with '--' .
+## Mapunit Table
+This table selects all map units for a given area of interst. Mapunits are described as a collection of areas defined and named the same in terms of their soil components by the NSSH (Part 627.03).  To select all mapunits for the most detailed US soil survey product, SSURGO, use `areasymbol != 'US'` OR for the general soil map, STATSGO, use `areasymbol = 'US'`. This is an example from `mukey = 2809839`.  For general use, `areasymbol = 'WI025'` (commented out below).
 
 ```{SQL}
-   SELECT areasymbol, areaname, mapunit.mukey, mapunit.mukey AS mulink, mapunit.musym, 
-   nationalmusym, mapunit.muname, mukind, muacres
-INTO #main
+SELECT areasymbol, areaname, mapunit.mukey, mapunit.mukey AS mulink, mapunit.musym, 
+nationalmusym, mapunit.muname, mukind, muacres
+INTO
 FROM legend
 INNER JOIN mapunit on legend.lkey=mapunit.lkey AND mapunit.mukey = 2809839
 INNER JOIN muaggatt AS mt1 on mapunit.mukey=mt1.mukey
@@ -158,11 +156,11 @@ GROUP BY mukey, cokey, sum_comp2
 Tables that collect data by layers (horizons) from each component needed for SOC stock calculation
 
 Layer variables used in SOC stock calculation (r denotes that the value is representative of the central tendency):
-   * hzdept_r  = top depth of layer (NSSH, 2017 -- Part 618.36).
-   * hzdepb = bottom depth of layer (NSSH, 2017 -- Part 618.35).
-   * om_r = layer organic matter (%) content. US soil survey databases report OM (NSSH, 2017 -- Part 618.43)this is typically based on measurement of total combustion carbon and calcium carbonate concentration by calcimeter (KSSL, 2014). 
-   * dbthirdbar_r = bulk density represting field conditions(NSSH, 2017 -- Part 618.7). US soil survey bases this on a clod measurement of volume at 1/3 bar and weight at oven dry water content (KSSL, 2014) 
-   * fragvol_r = Volume of coarse fragments (>2mm in size), typically based on visual estimates (NSSH, 2017 -- Part 618.36).
+   * `hzdept_r`  = top depth of layer (NSSH, 2017 -- Part 618.36).
+   * `hzdepb` = bottom depth of layer (NSSH, 2017 -- Part 618.35).
+   * `om_r` = layer organic matter (%) content. US soil survey databases report OM (NSSH, 2017 -- Part 618.43)this is typically based on measurement of total combustion carbon and calcium carbonate concentration by calcimeter (KSSL, 2014). 
+   * `dbthirdbar_r` = bulk density represting field conditions(NSSH, 2017 -- Part 618.7). US soil survey bases this on a clod measurement of volume at 1/3 bar and weight at oven dry water content (KSSL, 2014) 
+   * `fragvol_r` = Volume of coarse fragments (>2mm in size), typically based on visual estimates (NSSH, 2017 -- Part 618.36).
 
 
 ### acpf hzn Table
