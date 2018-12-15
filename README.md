@@ -14,4 +14,6 @@
    ## Soil Data Access Script Examples with Explanation
  list:
    *  [Soil Organic Carbon Stocks by Map Unit](https://ncss-tech.github.io/sda-lib/chapters/Soil%20Organic%20Carbon%20Stocks.html) 
+  *  [Geometry Intersect by Map Unit Acres](https://ncss-tech.github.io/sda-lib/chapters/) 
+
 
